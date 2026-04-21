@@ -1,8 +1,8 @@
 class Validator:
-    # SD-Step 3: Validator receives validateFormat(data) from SubmissionController
+    # Step 3: Validator receives validateFormat(data) from SubmissionController
     def validateFormat(self, data):
         
-        # Returns "valid" or "invalid"
+        # Step 4: Returns "valid" or "invalid"
         if not data.get("title") or not data.get("content"):
             return "invalid"
 

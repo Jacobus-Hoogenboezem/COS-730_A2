@@ -11,7 +11,7 @@ class ReviewerManager:
 
     # Step 8: ReviewerManager.filterConflicts(reviewerList)
     def filterConflicts(self, reviewerList):
-        return [r for r in reviewerList if 15 not in r["conflicts"]] # @TODO Add better checks.. How many conflicts are too much? any?
+        return [r for r in reviewerList if 15 not in r["conflicts"]] # @TODO Add better checks.. check researcher IDs 
 
     # Step 9: ReviewerManager.checkWorkload(reviewerList)
     def checkWorkload(self, reviewerList):

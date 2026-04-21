@@ -4,14 +4,12 @@ from researcher import Researcher
 
 if __name__ == "__main__":
     
-    reseracher = Researcher()
+    researcher = Researcher()
     ui = UI()
     controller = SubmissionController()
     
-    # Step 1: Researcher submits research output
+    # Step 1: Researcher submits research output to UI
     submission = researcher.submitResearchOutput()
-    
-    # Step 2: UI Submit data to SubmissionController
-    outcome = ui.submit(data, controller)
+    outcome = ui.submit(submission, controller)
 
     print(f"\n[Main] Final outcome: {outcome}")

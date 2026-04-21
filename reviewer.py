@@ -1,6 +1,6 @@
 class Reviewer:
     def __init__(self, data):
-        self.id = data["id"]
+        self.id = data["ID"]
         self.name = data["name"]
 
     # Step 11: Reviewer.assignReview()

@@ -8,7 +8,7 @@ class Database:
         ]
 
     # Step 5: Database.saveSubmission(data)
-    def saveSubmission(self. data):
+    def saveSubmission(self, data):
         self.submissions.append(data)
         return "confirmation"
 

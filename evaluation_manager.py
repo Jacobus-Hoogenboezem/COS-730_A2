@@ -1,4 +1,8 @@
 class EvaluationManager:
+    # Step 13: EvaluationManager.startEvaluation()
+    def startEvaluation(self):
+        # ??
+    
     # Step 14: EvaluationManager.saveScore(score)
     def saveScore(self, score):
         self.scores = getattr(self, 'scores', [])

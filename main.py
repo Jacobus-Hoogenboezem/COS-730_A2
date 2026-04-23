@@ -1,15 +1,15 @@
-from submission_controller import SubmissionController
 from ui import UI
 from researcher import Researcher
+from shared_objects import Submission
 
 if __name__ == "__main__":
-    
-    researcher = Researcher()
-    ui = UI()
-    controller = SubmissionController()
-    
-    # Step 1: Researcher submits research output to UI
-    submission = researcher.submitResearchOutput()
-    outcome = ui.submit(submission, controller)
 
-    print(f"\n[Main] Final outcome: {outcome}")
+    # Dummy submission data for researcher to use.
+    data = Submission(
+        title="Differential Evolution for image registration",
+        content="A software system grounded on Differential Evolution to automatically...", 
+        researcher_id=15
+    )
+
+    researcher = Researcher()
+    researcher.initiateIntelligentSubmissionAndReviewSystem(data)

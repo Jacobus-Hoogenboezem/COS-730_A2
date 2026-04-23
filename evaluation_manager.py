@@ -2,6 +2,9 @@ class EvaluationManager:
     # Step 13: EvaluationManager.startEvaluation()
     def startEvaluation(self):
         # ??
+        return 
+
+    
     
     # Step 14: EvaluationManager.saveScore(score)
     def saveScore(self, score):

@@ -7,6 +7,6 @@ class Reviewer:
     def assignReview(self):
         return f"Review assigned to {self.name}"
 
-    # Step 13: Reviewer.submitScore(score)
+    # Step 13: Reviewer.submitScore(score) 
     def submitScore(self, score):
         return score

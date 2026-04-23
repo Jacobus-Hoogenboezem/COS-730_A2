@@ -4,6 +4,7 @@ from reviewer_manager import ReviewerManager
 from reviewer import Reviewer
 from evaluation_manager import EvaluationManager
 from notification_service import NotificationService
+from ui import UI
 
 class SubmissionController:
 
@@ -13,49 +14,53 @@ class SubmissionController:
         self.reviewer_manager = ReviewerManager(self.database)
         self.evaluation_manager = EvaluationManager()
         self.notification_service = NotificationService()
+        self.ui = UI()
 
     # Step 2: SubmissionController receives submit(data) from UI
     def submit(self, submission):
         print("[SubmissionController] Received submission.")
 
         # Step 3: SubmissionController -> Validator : validateFormat(data)
+        print("[SubmissionController] Sending Validation Request to Validator")
         validation_result = self.validator.validateFormat(submission.to_dict())
         print(f"[SubmissionController] Validation result: {validation_result}")
 
         # Step alt [invalid]: return error to UI
         if validation_result == "invalid":
-            print("[SubmissionController] Validation failed. Returning error.")
-            return "error"
+            print("[SubmissionController] Validation failed. Returning error to UI (as a call).")
+            self.ui.returnError()
 
-        # Step [valid] continues:
+        #     # return "error"
 
-        # Step 5: SubmissionController -> Database : saveSubmission(data)
-        confirmation = self.database.saveSubmission(submission.to_dict())
-        print(f"[SubmissionController] Database confirmation: {confirmation}")
+        # # Step [valid] continues:
 
-        # Step 6: SubmissionController -> ReviewerManager : getAvailableReviewers()
-        filtered_reviewers = self.reviewer_manager.getAvailableReviewers()
-        print(f"[SubmissionController] Filtered reviewers: {[r['name'] for r in filtered_reviewers]}")
+        # # Step 5: SubmissionController -> Database : saveSubmission(data)
+        # confirmation = self.database.saveSubmission(submission.to_dict())
+        # print(f"[SubmissionController] Database confirmation: {confirmation}")
 
-        # Step loop [assign reviewers]:
-        # SubmissionController -> Reviewer : assignReview() for each reviewer
-        reviewer_objects = []
-        for r_data in filtered_reviewers:
-            reviewer = Reviewer(r_data)
-            msg = reviewer.assignReview()   # Step 11
-            print(f"[SubmissionController] {msg}")
-            reviewer_objects.append(reviewer)
+        # # Step 6: SubmissionController -> ReviewerManager : getAvailableReviewers()
+        # filtered_reviewers = self.reviewer_manager.getAvailableReviewers()
+        # print(f"[SubmissionController] Filtered reviewers: {[r['name'] for r in filtered_reviewers]}")
 
-        # Step 12: SubmissionController -> EvaluationManager : startEvaluation()
-        outcome = self.evaluation_manager.startEvaluation(reviewer_objects)
+        # # Step loop [assign reviewers]:
+        # # SubmissionController -> Reviewer : assignReview() for each reviewer
+        # reviewer_objects = []
+        # for r_data in filtered_reviewers:
+        #     reviewer = Reviewer(r_data)
+        #     msg = reviewer.assignReview()   # Step 11
+        #     print(f"[SubmissionController] {msg}")
+        #     reviewer_objects.append(reviewer)
 
-        # Step alt [accepted / rejected / revision]:
-        # NotificationService called by EvaluationManager in baseline diagram
-        if outcome == "accepted":
-            self.notification_service.notifyAcceptance()
-        elif outcome == "rejected":
-            self.notification_service.notifyRejection()
-        else:
-            self.notification_service.notifyRevision()
+        # # Step 12: SubmissionController -> EvaluationManager : startEvaluation()
+        # outcome = self.evaluation_manager.startEvaluation(reviewer_objects)
 
-        return outcome
+        # # Step alt [accepted / rejected / revision]:
+        # # NotificationService called by EvaluationManager in baseline diagram
+        # if outcome == "accepted":
+        #     self.notification_service.notifyAcceptance()
+        # elif outcome == "rejected":
+        #     self.notification_service.notifyRejection()
+        # else:
+        #     self.notification_service.notifyRevision()
+
+        # return outcome

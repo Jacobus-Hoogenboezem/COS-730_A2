@@ -16,4 +16,6 @@ class Database:
     def fetchReviewers(self):
         return self.reviewers
     
+    def saveScore(self):
+        print("[Database] Received request to save score")
     

@@ -4,7 +4,7 @@ from reviewer_manager import ReviewerManager
 from reviewer import Reviewer
 from evaluation_manager import EvaluationManager
 from notification_service import NotificationService
-from ui import UI
+from database import Database
 
 class SubmissionController:
 
@@ -15,6 +15,8 @@ class SubmissionController:
         self.evaluation_manager = EvaluationManager()
         self.notification_service = NotificationService()
         self.ui = UI()
+        self.database = Database()
+        self.reviewer = Reviewer()
 
     # Step 2: SubmissionController receives submit(data) from UI
     def submit(self, submission):
@@ -28,31 +30,28 @@ class SubmissionController:
         # Step alt [invalid]: return error to UI
         if validation_result == "invalid":
             print("[SubmissionController] Validation failed. Returning error to UI (as a call).")
-            self.ui.returnError()
-
-        #     # return "error"
+            return "error"
 
         # # Step [valid] continues:
 
-        # # Step 5: SubmissionController -> Database : saveSubmission(data)
-        # confirmation = self.database.saveSubmission(submission.to_dict())
-        # print(f"[SubmissionController] Database confirmation: {confirmation}")
+        # Step 5: SubmissionController -> Database : saveSubmission(data)
+        confirmation = self.database.saveSubmission(submission.to_dict())
+        print(f"[SubmissionController] Database confirmation: {confirmation}")
 
-        # # Step 6: SubmissionController -> ReviewerManager : getAvailableReviewers()
-        # filtered_reviewers = self.reviewer_manager.getAvailableReviewers()
-        # print(f"[SubmissionController] Filtered reviewers: {[r['name'] for r in filtered_reviewers]}")
+        # Step 6: SubmissionController -> ReviewerManager : getAvailableReviewers()
+        filtered_reviewers = self.reviewer_manager.getAvailableReviewers()
+        print(f"[SubmissionController] Received filtered reviewers: {[r['name'] for r in filtered_reviewers]}")
 
-        # # Step loop [assign reviewers]:
-        # # SubmissionController -> Reviewer : assignReview() for each reviewer
+        # Step loop [assign reviewers]:
+        # SubmissionController -> Reviewer : assignReview() for each reviewer
         # reviewer_objects = []
-        # for r_data in filtered_reviewers:
-        #     reviewer = Reviewer(r_data)
-        #     msg = reviewer.assignReview()   # Step 11
-        #     print(f"[SubmissionController] {msg}")
-        #     reviewer_objects.append(reviewer)
+        for r_data in filtered_reviewers:
+            self.reviewer = Reviewer(r_data)
+            self.reviewer.assignReview()   # Step 11
+            # reviewer_objects.append(reviewer)
 
-        # # Step 12: SubmissionController -> EvaluationManager : startEvaluation()
-        # outcome = self.evaluation_manager.startEvaluation(reviewer_objects)
+        # Step 12: SubmissionController -> EvaluationManager : startEvaluation()
+        self.evaluation_manager.startEvaluation()
 
         # # Step alt [accepted / rejected / revision]:
         # # NotificationService called by EvaluationManager in baseline diagram

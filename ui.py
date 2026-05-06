@@ -11,11 +11,11 @@ class UI:
         print("[UI] Forwarding to SubmissionController...")
 
         # Step 2: UI -> SubmissionController : submit(data)
-        self.controller.submit(data) # void since ui only receives back if theres a error (WITH A CALL).
+        result = self.controller.submit(data) # void since ui only receives back if theres a error (WITH A CALL).
 
-    def returnError(self):
-        print("[UI] Submission invalid. Returning error to Researcher. Displaying Invalid Submission")
-        #Display invalid submission
+        if result == "error":
+            print("[UI] Submission invalid. Returning error to Researcher. Displaying Invalid Submission")
+            #Display invalid submission
 
 
     # def submit(self, submission, controller):

@@ -1,4 +1,3 @@
-from submission_controller import SubmissionController
 from ui import UI
 
 class Researcher:
@@ -14,4 +13,5 @@ class Researcher:
         # return  # outcome # Notification? Void?
 
     def sendNotification(self, notification):
-        print(f"[Researcher] Received notification from notification_service")
+        print(f"[Researcher] Received notification from notification_service: {notification}")
+    

@@ -14,7 +14,6 @@ class SubmissionController:
         self.reviewer_manager = ReviewerManager(self.database)
         self.evaluation_manager = EvaluationManager()
         self.notification_service = NotificationService()
-        self.ui = UI()
         self.database = Database()
         self.reviewer = Reviewer()
 

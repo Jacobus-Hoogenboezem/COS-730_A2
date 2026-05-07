@@ -13,3 +13,6 @@ if __name__ == "__main__":
 
     researcher = Researcher()
     researcher.initiateIntelligentSubmissionAndReviewSystem(data)
+
+    # independent initiator
+    

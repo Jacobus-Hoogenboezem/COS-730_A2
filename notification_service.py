@@ -1,7 +1,6 @@
-
 class NotificationService:
     def __init__(self, researcher):
-        self.researcher = researcher()
+        self.researcher = researcher
 
     # Step 18 (alt accepted): NotificationService.notifyAcceptance()
     def notifyAcceptance(self):

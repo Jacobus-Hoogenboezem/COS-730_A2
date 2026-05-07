@@ -1,17 +1,17 @@
-from ui import UI
 
 class Researcher:
     def __init__(self):
-        self.ui = UI()
+        self.ui = None
 
+    def set_ui(self, ui):
+        self.ui = ui
+ 
     def initiateIntelligentSubmissionAndReviewSystem(self, data):
         print("[Researcher] Submitting research output...")
-        
-        # Step 1: Researcher -> UI : submitResearchOutput(self) 
-        self.ui.submitResearchOutput(data) # call is void. result will come from Notification or display on UI if submission is invalid.
-
-        # return  # outcome # Notification? Void?
-
+ 
+        # Step 1: Researcher -> UI : submitResearchOutput(data)
+        self.ui.submitResearchOutput(data)  # void — result comes back via notification
+ 
     def sendNotification(self, notification):
-        print(f"[Researcher] Received notification from notification_service: {notification}")
-    
+        print(f"[Researcher] Received notification from NotificationService: {notification}")
+ 

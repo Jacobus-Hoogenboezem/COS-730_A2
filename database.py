@@ -9,13 +9,15 @@ class Database:
  
     # Step 5: Database.saveSubmission(data)
     def saveSubmission(self, data):
+        print("[Database] - saveSubmission(self, data) - Received request to save submission")
         self.submissions.append(data)
         return "confirmation"
  
     # Step 7: Database.fetchReviewers()
     def fetchReviewers(self):
+        print("[Database] - fetchReviewers(self) - Received request to fetch reviewers")
         return self.reviewers
     
     def saveScore(self, score):
-        print(f"[Database] Received request to save score: {score}")
+        print(f"[Database] - saveScore(self, score) - Received request to save score: {score}")
     

@@ -6,25 +6,24 @@ class ReviewerManager:
 
     # Step 6: ReviewerManager.getAvailableReviewers()
     def getAvailableReviewers(self):
-        print("[ReviewerManager] received filter request from SubmissionController")
+        print("[ReviewerManager] - getAvailableReviewers(self) - received filter request from SubmissionController")
         reviewerList = self.database.fetchReviewers()  # Step 7
-        print("[ReviewerManager] Received reviewer lisst from Database")
+        print("[ReviewerManager] - reviewerList - received")
         filtered = self.filterConflicts(reviewerList)  # Step 8
-        print("[ReviewerManager] filtered Conflits")
         filtered = self.checkWorkload(filtered)        # Step 9
-        print("[ReviewerManager] filtered Workloads")
-        print("[ReviewerManager] returning available reviewers to SubmissionController")
         return filtered
 
     # Step 8: ReviewerManager.filterConflicts(reviewerList)
     def filterConflicts(self, reviewerList):
+        print("[ReviewerManager] - filterConflicts(self, reviewerList) - filtered Conflits")
         return [r for r in reviewerList if 15 not in r["conflicts"]] # @TODO Add better checks.. check researcher IDs 
 
     # Step 9: ReviewerManager.checkWorkload(reviewerList)
     def checkWorkload(self, reviewerList):
+        print("[ReviewerManager] - checkWorkload(self, reviewerList) - check workload")
         return [r for r in reviewerList if r["workload"] < 5] # @TODO Refine. How do we measure workload and what is too much?
 
     def submitScore(self, score):
-        print("[ReviewerManager] Received submit score request")
+        print("[ReviewerManager] - submitScore(self, score) - Received submit score request")
         self.database.saveScore(score)
 

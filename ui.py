@@ -5,11 +5,10 @@ class UI:
     # Step 2: UI receives submitResearchOutput(data) from Researcher
     #         UI -> SubmissionController : submit(data)
     def submitResearchOutput(self, data):
-        print("[UI] Received submission from Researcher.")
-        print("[UI] Forwarding to SubmissionController...")
+        print("[UI] - submitResearchOutput(self, data) - Received submission from Researcher.")
  
         # Step 2: UI -> SubmissionController : submit(data)
         result = self.controller.submit(data)  # void unless invalid
  
         if result == "error":
-            print("[UI] Submission invalid. Displaying error to Researcher.")
+            print("[UI] - return error - Submission invalid. Displaying error to Researcher.")

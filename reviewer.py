@@ -6,7 +6,7 @@ class Reviewer:
  
     # Step 11: Reviewer.assignReview()
     def assignReview(self):
-        print(f"[Reviewer] Review assigned to {self.name}.")
+        print(f"[Reviewer] - assignReview(self) - Review assigned to {self.name}.")
         score = 7 # @TODO place holder score
         self.evaluation_manager.submitScore(score)
  

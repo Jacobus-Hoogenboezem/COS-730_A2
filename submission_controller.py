@@ -13,12 +13,11 @@ class SubmissionController:
 
     # Step 2: SubmissionController receives submit(data) from UI
     def submit(self, submission):
-        print("[SubmissionController] Received submission.")
+        print("[SubmissionController] - submit(self, submission) - Received submission.")
 
         # Step 3: SubmissionController -> Validator : validateFormat(data)
-        print("[SubmissionController] Sending validation request to Validator.")
         validation_result = self.validator.validateFormat(submission.to_dict())
-        print(f"[SubmissionController] Validation result: {validation_result}")
+        print(f"[SubmissionController] - valid/invalid - Validation result: {validation_result}")
 
         # Step alt [invalid]: return error to UI
         if validation_result == "invalid":
@@ -31,7 +30,7 @@ class SubmissionController:
 
         # Step 6: SubmissionController -> ReviewerManager : getAvailableReviewers()
         filtered_reviewers = self.reviewer_manager.getAvailableReviewers()
-        print(f"[SubmissionController] Received filtered reviewers: {[r['name'] for r in filtered_reviewers]}")
+        print(f"[SubmissionController] - filteredReviewers - Received filtered reviewers: {[r['name'] for r in filtered_reviewers]}")
 
         # Step loop [assign reviewers]:
         # SubmissionController -> Reviewer : assignReview() for each reviewer

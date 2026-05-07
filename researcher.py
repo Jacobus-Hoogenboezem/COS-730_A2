@@ -13,5 +13,5 @@ class Researcher:
         self.ui.submitResearchOutput(data)  # void — result comes back via notification
  
     def sendNotification(self, notification):
-        print(f"[Researcher] Received notification from NotificationService: {notification}")
+        print(f"[Researcher] - sendNotification(self, notification) - Received notification from NotificationService: {notification}")
  

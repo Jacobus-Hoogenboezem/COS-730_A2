@@ -6,37 +6,44 @@ class EvaluationManager:
 
     # Step 13: EvaluationManager.startEvaluation()
     def startEvaluation(self):
-        print("[EvaluationManager] Evaluation started.")
+        print("[EvaluationManager] - startEvaluation(self) - Evaluation started.")
 
     # Step 13: Reviewer -> EvaluationManager : submitScore(score)
     def submitScore(self, score): 
-        print("[EvaluationManager] Received request to submit score.")
+        print("[EvaluationManager] - submitScore(self, score) - Received request to submit score.")
         self.scores.append(score)
         self.database.saveScore(score)
-        print("[EvaluationManager] Calling database.saveScore()")
  
  
-        print("[EvaluationManager] Calling calculateAverage()")
         avg = self.calculateAverage()
 
-        print("[EvaluationManager] Calling checkConsensus()")
         self.checkConsensus()
 
-        # Step 17: notify based on average score
-        if avg >= 7:
-            print("[EvaluationManager] Calling notification_service.notifyAcceptance()")
+        res = self.applyRules()
+        if res == "accepted":
             self.notification_service.notifyAcceptance()
-        elif avg >= 4:
-            print("[EvaluationManager] Calling notification_service.notifyRevision()")
+        elif res == "revision":
             self.notification_service.notifyRevision()
         else:
-            print("[EvaluationManager] Calling notification_service.notifyRejection()")
             self.notification_service.notifyRejection()
 
     # Step 15: EvaluationManager.calculateAverage()
     def calculateAverage(self):
+        print("[EvaluationManager] - calculateAverage(self) - Received request to calculate average.")
         return sum(self.scores) / len(self.scores)
 
     # Step 16: EvaluationManager.checkConsensus()
     def checkConsensus(self):
+        print("[EvaluationManager] - checkConsensus(self) - Received request to check Consensus.")
         return max(self.scores) - min(self.scores) <= 3
+
+    # Step 17: EvaluationManager.applyRules()
+    def applyRules(self):
+        print("[EvaluationManager] - applyRules(self) - Received request to apply rules.")
+        avg = self.calculateAverage()
+        if avg >= 7:
+            return "accepted"
+        elif avg >= 4:
+            return "revision"
+        else:
+            return "rejected"

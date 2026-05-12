@@ -3,10 +3,9 @@ class Reviewer:
         self.id = data["ID"]
         self.name = data["name"]
         self.evaluation_manager = evaluation_manager
- 
-    # Step 11: Reviewer.assignReview()
-    def assignReview(self):
-        print(f"[Reviewer] - assignReview(self) - Review assigned to {self.name}.")
-        score = 7 # @TODO place holder score
+
+    def assignAndReview(self):
+        print(f"[Reviewer] - assignAndReview(self) - Review assigned and conducted by {self.name}.")
+        score = 7  # @TODO replace with real scoring logic
+        print(f"[Reviewer] - Submitting score: {score}")
         self.evaluation_manager.submitScore(score)
- 
